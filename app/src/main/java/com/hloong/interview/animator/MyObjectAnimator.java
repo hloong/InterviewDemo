@@ -5,7 +5,7 @@ import android.view.View;
 
 import java.lang.ref.WeakReference;
 
-public class MyObjectAnimator  implements VSYNCManager.AnimationFrameCallback {
+public class MyObjectAnimator implements VSYNCManager.AnimationFrameCallback {
     private static final String TAG = "tuch";
     long mStartTime = -1;
     private long mDuration = 0;

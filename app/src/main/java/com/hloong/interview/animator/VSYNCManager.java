@@ -3,6 +3,9 @@ package com.hloong.interview.animator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 模拟信号发送， 16ms 一次循环
+ */
 public class VSYNCManager {
     private static final VSYNCManager ourInstance = new VSYNCManager();
 
@@ -21,7 +24,6 @@ public class VSYNCManager {
         @Override
         public void run() {
             while (true) {
-
                 try {
                     Thread.sleep(16);
                 } catch (InterruptedException e) {
