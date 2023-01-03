@@ -1,8 +1,10 @@
 package com.hloong.interview
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.hloong.interview.ui.splash_ani.SplashActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -10,9 +12,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var anim = ObjectAnimator.ofFloat(bt,"alpha",0f,1f)
-        anim.duration = 1000
-        anim.start()
+        bt.setOnClickListener {
+            startActivity(Intent(this,SplashActivity::class.java))
+        }
+
     }
 
 

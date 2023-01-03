@@ -19,7 +19,7 @@
         android:id="@+id/bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BUTTON"
+        android:text="GoTo Splash"
 
         tools:ignore="MissingConstraints" />
 

@@ -11,9 +11,12 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.ThemedSpinnerAdapter;
+import androidx.customview.widget.ViewDragHelper;
 import androidx.viewpager.widget.ViewPager;
 
 import com.hloong.interview.R;
+import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,20 +61,11 @@ public class ParallaxContainer extends FrameLayout implements ViewPager.OnPageCh
         addView(vp,0);
     }
 
-
-
-
-
-
-
-
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//        动画
+        //动画在滚动监听里面设置
         int containerWidth = getWidth();
         ParallaxFragment outFragment = null;
-
         try {
             outFragment = fragments.get(position - 1);
         } catch (Exception e) {}

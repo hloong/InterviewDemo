@@ -1,5 +1,6 @@
 package com.hloong.interview.ui.splash_ani;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -32,11 +33,11 @@ public class ParallaxLayoutInflater  extends LayoutInflater {
 
 //    ------------------------------------------------
     class ParallaxFactory implements Factory2{
-    private final String[] sClassPrefix = {
-            "android.widget.",
-            "android.view."
-    };
-    int[] attrIds = {
+        private final String[] sClassPrefix = {
+                "android.widget.",
+                "android.view."
+        };
+        int[] attrIds = {
             R.attr.a_in,
             R.attr.a_out,
             R.attr.x_in,
@@ -51,9 +52,9 @@ public class ParallaxLayoutInflater  extends LayoutInflater {
 //    自定义控件 com.wangyi.splashwangyi.MyView
 
 //
+        @SuppressLint("ResourceType")
         @Override
         public View onCreateView(View parent, String name, Context context, AttributeSet attributeSet) {
-
             View view = null;
              view=  createMyView(name, context, attributeSet);
             if (view != null) {
@@ -77,13 +78,12 @@ public class ParallaxLayoutInflater  extends LayoutInflater {
         }
 
     private View createMyView(String name, Context context, AttributeSet attributeSet) {
-        if (name.contains(".")) {
-          return   reflectView(name, null, context, attributeSet);
+        if (name.contains(".")) {//自定义控件，如果需要androidx的控件，这里需要修改
+          return reflectView(name, null, context, attributeSet);
         }else {
             for (String prefix : sClassPrefix) {
                 View view = reflectView(name, prefix, context, attributeSet);
 //                获取系统空间的自定义属性
-
                 if (view != null) {
                     return view;
                 }
@@ -95,7 +95,7 @@ public class ParallaxLayoutInflater  extends LayoutInflater {
     private View reflectView(String name, String prefix, Context context,
                              AttributeSet attrs) {
         try {
-            //通过统的inflater创建视图，读取系统的属性
+            //通过系统的inflater创建视图，读取系统的属性
             return inflater.createView(name, prefix, attrs);
         } catch (Exception e) {
             return null;
