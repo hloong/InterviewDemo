@@ -18,6 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="动画粒子爆炸效果"
-
+        tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/btRv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RecyclerView 自定义滑动加自定义Behavior"
         tools:ignore="MissingConstraints" />
 </LinearLayout>
