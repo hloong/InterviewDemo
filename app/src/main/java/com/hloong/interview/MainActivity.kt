@@ -3,6 +3,7 @@ package com.hloong.interview
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.hloong.interview.ui.car_ani.CarAniActivity
 import com.hloong.interview.ui.recyclerview.RecyclerViewActivity
 import com.hloong.interview.ui.splash_ani.SplashActivity
 import com.hloong.interview.ui.split.SplitActivity
@@ -19,9 +20,13 @@ class MainActivity : AppCompatActivity() {
         btSplit.setOnClickListener {
             startActivity(Intent(this,SplitActivity::class.java))
         }
+        btCar.setOnClickListener {
+            startActivity(Intent(this,CarAniActivity::class.java))
+        }
         btRv.setOnClickListener {
             startActivity(Intent(this,RecyclerViewActivity::class.java))
         }
+
 
     }
 

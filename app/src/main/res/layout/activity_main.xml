@@ -20,6 +20,12 @@
         android:text="动画粒子爆炸效果"
         tools:ignore="MissingConstraints" />
     <Button
+        android:id="@+id/btCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="小车圆圈运动动画实例"
+        tools:ignore="MissingConstraints" />
+    <Button
         android:id="@+id/btRv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
