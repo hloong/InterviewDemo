@@ -31,4 +31,11 @@
         android:layout_height="wrap_content"
         android:text="RecyclerView 自定义滑动加自定义Behavior"
         tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/btRvCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手写RecyclerView"
+        tools:ignore="MissingConstraints" />
+
 </LinearLayout>
