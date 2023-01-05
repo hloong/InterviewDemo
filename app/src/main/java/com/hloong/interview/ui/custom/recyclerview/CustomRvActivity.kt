@@ -16,7 +16,7 @@ class CustomRvActivity : AppCompatActivity() {
         setContentView(R.layout.activity_custom_rv)
         rv_custom.adapter = object:CustomRecyclerView.Adapter{
             override fun getHeight(index: Int): Int {
-                TODO("Not yet implemented")
+                return 100
             }
 
             override fun onCreateViewHolder(
@@ -26,7 +26,7 @@ class CustomRvActivity : AppCompatActivity() {
             ): View {
                 var cv = convertView
                 cv = this@CustomRvActivity.layoutInflater.inflate(R.layout.item_table,parent,false)
-                var tv = cv.findViewById<TextView>(R.id.text1)
+                var tv = cv!!.findViewById<TextView>(R.id.text1)
                 tv.text = "This is Row$pos"
                 return cv
             }

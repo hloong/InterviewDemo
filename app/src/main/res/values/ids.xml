@@ -2,4 +2,5 @@
 <resources>
     <item name="parallax_pager" type="id"/>
     <item name="parallax_view_tag" type="id"/>
+    <item name="tag_type_view" type="id"/>
 </resources>
