@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.hloong.interview.ui.car_ani.CarAniActivity
+import com.hloong.interview.ui.custom.mapview.MapChinaActivity
 import com.hloong.interview.ui.custom.recyclerview.CustomRvActivity
 import com.hloong.interview.ui.recyclerview.RecyclerViewActivity
 import com.hloong.interview.ui.splash_ani.SplashActivity
@@ -30,7 +31,9 @@ class MainActivity : AppCompatActivity() {
         btRvCustom.setOnClickListener {
             startActivity(Intent(this,CustomRvActivity::class.java))
         }
-
+        btSvgMap.setOnClickListener {
+            startActivity(Intent(this,MapChinaActivity::class.java))
+        }
     }
 
 
