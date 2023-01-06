@@ -48,19 +48,10 @@ public class CustomRecyclerView extends ViewGroup {
         }
     }
 
-    public CustomRecyclerView(Context context) {
-        super(context);
-        init(context,null);
-    }
 
     public CustomRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context,attrs);
-    }
-
-
-    public CustomRecyclerView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -99,11 +90,31 @@ public class CustomRecyclerView extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return super.onInterceptTouchEvent(ev);
+        boolean intercept = false;
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                currentY = (int) ev.getRawY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int y2 = Math.abs(currentY - (int)ev.getRawY());
+                if (y2 > touchSlop){
+                    intercept = true;
+                }
+        }
+        return intercept;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_MOVE: {
+                int y2 = (int) event.getRawY();
+                //上滑为正数，下滑为负数
+                int diffY = currentY - y2;
+                //画布移动，不影响子控件位置
+                scrollBy(0, diffY);
+            }
+        }
         return super.onTouchEvent(event);
     }
 
@@ -119,7 +130,7 @@ public class CustomRecyclerView extends ViewGroup {
                 width = r - l;
                 height = b - t;
                 int left, top = 0, right, bottom;
-                for (int i = 0; i < rowCount&&top<height; i++) {
+                for (int i = 0; i < rowCount && top<height; i++) {
                     right = width;
                     bottom = top + heights[i];
 //                    生成一个View
@@ -135,37 +146,104 @@ public class CustomRecyclerView extends ViewGroup {
         view.layout(left, top, right, bottom);
         return view;
     }
-    private View obtainView(int row, int width, int height) {
-//        key type
-        int itemType= adapter.getItemViewType(row);
+    private View obtainView(int row, int width, int height){
+        try {
+            //        key type
+            int itemType= adapter.getItemViewType(row);
 //       取不到
-        View reclyView = recycler.get(itemType);
-        View view = null;
-        if (reclyView == null) {
-            view = adapter.onCreateViewHolder(row, reclyView, this);
-            if (view == null) {
-                throw new RuntimeException("onCreateViewHodler  必须填充布局");
+            View reclyView = recycler.get(itemType);
+            View view = null;
+            if (reclyView == null) {
+                view = adapter.onCreateViewHolder(row, reclyView, this);
+                if (view == null) {
+                    throw new RuntimeException("onCreateViewHodler  必须填充布局");
+                }
+            }else {
+                view = adapter.onBinderViewHolder(row, reclyView, this);
             }
-        }else {
-            view = adapter.onBinderViewHolder(row, reclyView, this);
+            view.setTag(R.id.tag_type_view, itemType);
+            view.measure(MeasureSpec.makeMeasureSpec(width,MeasureSpec.EXACTLY)
+                    ,MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY));
+            addView(view,0 );
+            return view;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
-        view.setTag(R.id.tag_type_view, itemType);
-        view.measure(MeasureSpec.makeMeasureSpec(width,MeasureSpec.EXACTLY)
-                ,MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY));
-        addView(view,0 );
-        return view;
     }
     @Override
     public void scrollBy(int x, int y) {
-        super.scrollBy(x, y);
+        //scrollY表示 第一个可见Item的左上顶点 距离屏幕的左上顶点的距离
+        scrollY += y;
+        scrollY = scrollBounds(scrollY);
+        if (scrollY > 0) {
+            //上滑正  下滑负  边界值
+            while (scrollY > heights[firstRow]) {
+            //1 上滑移除  2 上划加载  3下滑移除  4 下滑加载
+                removeView(viewList.remove(0));
+                scrollY -= heights[firstRow];
+                firstRow++;
+            }
+            while (getFillHeight() < height) {
+                int addLast = firstRow + viewList.size();
+                View view= obtainView(addLast, width, heights[addLast]);
+                viewList.add(viewList.size(), view);
+            }
+        } else if (scrollY < 0) {
+//            4 下滑加载
+            while (scrollY < 0) {
+                int firstAddRow = firstRow - 1;
+                View view = obtainView(firstAddRow, width, heights[firstAddRow]);
+                viewList.add(0,view);
+                firstRow--;
+                scrollY += heights[firstRow+1];
+            }
+//             3下滑移除
+            while (sumArray(heights, firstRow, viewList.size()) - scrollY - heights[firstRow + viewList.size() - 1] >= height) {
+                removeView(viewList.remove(viewList.size() - 1));
+            }
+        }else {
+        }
+        repositionViews();
+    }
+    private int scrollBounds(int scrollY) {
+        //上滑
+        if (scrollY > 0) {
+        }else {
+        //极限值  会取零  非极限值的情况下   socrlly
+            scrollY = Math.max(scrollY, -sumArray(heights, 0, firstRow));
+        }
+        return scrollY;
+        //下滑
+    }
+    private void repositionViews() {
+        int left, top, right, bottom, i;
+        top =  - scrollY;
+        i = firstRow;
+        for (View view : viewList) {
+            bottom = top + heights[i++];
+            view.layout(0, top, width, bottom);
+            top = bottom;
+        }
+    }
+    private  int getFillHeight() {
+//        数据的高度 -scrollY
+        return sumArray(heights, firstRow, viewList.size()) - scrollY;
     }
 
-    interface Adapter{
-        View onCreateViewHolder(int pos,View convertView,ViewGroup parent);
-        View onBinderViewHolder(int pos,View convertView,ViewGroup parent);
+    @Override
+    public void removeView(View view) {
+        super.removeView(view);
+        int key = (int) view.getTag(R.id.tag_type_view);
+        recycler.put(view,key);
+    }
+
+    public interface Adapter{
+         View onCreateViewHolder(int pos,View convertView, ViewGroup parent);
+         View onBinderViewHolder(int pos,View convertView,ViewGroup parent);
         int getItemViewType(int row);
         int getViewTypeCount();
         int getCount();
-        public int getHeight(int index);
+        int getHeight(int index);
     }
 }

@@ -20,8 +20,7 @@ public class Recycler {
         try{
             return views[type].pop();
         }catch (Exception e){
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }

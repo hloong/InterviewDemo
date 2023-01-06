@@ -25,7 +25,7 @@ class CustomRvActivity : AppCompatActivity() {
                 parent: ViewGroup?
             ): View {
                 var cv = convertView
-                cv = this@CustomRvActivity.layoutInflater.inflate(R.layout.item_table,parent,false)
+                cv = LayoutInflater.from(this@CustomRvActivity).inflate(R.layout.item_table,parent,false)
                 var tv = cv!!.findViewById<TextView>(R.id.text1)
                 tv.text = "This is Row$pos"
                 return cv
