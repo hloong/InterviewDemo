@@ -65,12 +65,9 @@ class VLayoutActivity : AppCompatActivity() {
         ) {
             override fun onBindViewHolder(holder: BaseViewHolder, i: Int) {
                 val arrayList: ArrayList<String> = ArrayList()
-                arrayList.add("http://dn.dengpaoedu.com/examples/glide/1.jpg")
-                arrayList.add("http://dn.dengpaoedu.com/examples/glide/2.jpg")
-                arrayList.add("http://dn.dengpaoedu.com/examples/glide/3.jpg")
-                arrayList.add("http://dn.dengpaoedu.com/examples/glide/4.jpg")
-                arrayList.add("http://dn.dengpaoedu.com/examples/glide/5.jpg")
-                arrayList.add("http://dn.dengpaoedu.com/examples/glide/6.jpg")
+                arrayList.add("https://img.zcool.cn/community/017a9460d52b8311013f4720c83ccf.jpg@1280w_1l_2o_100sh.jpg")
+                arrayList.add("https://img.zcool.cn/community/013d9760331be111013ef90f24aa2f.jpg@1280w_1l_2o_100sh.jpg")
+                arrayList.add("https://img.zcool.cn/community/0141145ef9b9b4a801215aa00e459e.jpg@2o.jpg")
                 // 绑定数据
                 var mBanner = holder.getView(R.id.banner) as Banner
                 //设置banner样式
