@@ -43,4 +43,10 @@
         android:layout_height="wrap_content"
         android:text="SVG china Map地图"
         tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/btVLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="vlayout示例，注意vlayout已经废弃，用来看源码"
+        tools:ignore="MissingConstraints" />
 </LinearLayout>

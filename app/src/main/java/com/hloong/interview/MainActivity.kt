@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.hloong.interview.ui.car_ani.CarAniActivity
 import com.hloong.interview.ui.custom.mapview.MapChinaActivity
 import com.hloong.interview.ui.custom.recyclerview.CustomRvActivity
+import com.hloong.interview.ui.custom.vlayout.VLayoutActivity
 import com.hloong.interview.ui.recyclerview.RecyclerViewActivity
 import com.hloong.interview.ui.splash_ani.SplashActivity
 import com.hloong.interview.ui.split.SplitActivity
@@ -33,6 +34,9 @@ class MainActivity : AppCompatActivity() {
         }
         btSvgMap.setOnClickListener {
             startActivity(Intent(this,MapChinaActivity::class.java))
+        }
+        btVLayout.setOnClickListener {
+            startActivity(Intent(this,VLayoutActivity::class.java))
         }
     }
 
