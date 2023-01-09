@@ -49,4 +49,11 @@
         android:layout_height="wrap_content"
         android:text="vlayout示例，注意vlayout已经废弃，用来看源码"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="网易云音乐播放音乐转盘"
+        tools:ignore="MissingConstraints" />
 </LinearLayout>

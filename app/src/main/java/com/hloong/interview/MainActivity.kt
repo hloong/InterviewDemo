@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.hloong.interview.ui.car_ani.CarAniActivity
 import com.hloong.interview.ui.custom.mapview.MapChinaActivity
+import com.hloong.interview.ui.custom.player.PlayerActivity
 import com.hloong.interview.ui.custom.recyclerview.CustomRvActivity
 import com.hloong.interview.ui.custom.vlayout.VLayoutActivity
 import com.hloong.interview.ui.recyclerview.RecyclerViewActivity
@@ -37,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         }
         btVLayout.setOnClickListener {
             startActivity(Intent(this,VLayoutActivity::class.java))
+        }
+        btPlayer.setOnClickListener {
+            startActivity(Intent(this,PlayerActivity::class.java))
         }
     }
 
