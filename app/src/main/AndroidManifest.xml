@@ -11,11 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.custom.player.PlayerActivity"></activity>
+        <activity
+            android:theme="@style/PlayerActivity"
+            android:name=".ui.custom.player.PlayerActivity"></activity>
         <activity android:name=".ui.custom.vlayout.VLayoutActivity" />
         <activity android:name=".ui.custom.mapview.MapChinaActivity" />
         <activity android:name=".ui.custom.recyclerview.CustomRvActivity" />
-        <activity android:name=".ui.car_ani.CarAniActivity" />
+        <activity android:name="com.hloong.interview.ui.custom.car_ani.CarAniActivity" />
         <activity android:name=".ui.recyclerview.RecyclerViewActivity" />
         <activity android:name=".ui.split.SplitActivity" />
         <activity android:name=".MainActivity">

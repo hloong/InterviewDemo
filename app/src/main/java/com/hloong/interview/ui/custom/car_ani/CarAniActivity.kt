@@ -1,4 +1,4 @@
-package com.hloong.interview.ui.car_ani
+package com.hloong.interview.ui.custom.car_ani
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

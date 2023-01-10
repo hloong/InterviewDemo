@@ -3,7 +3,7 @@ package com.hloong.interview
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.hloong.interview.ui.car_ani.CarAniActivity
+import com.hloong.interview.ui.custom.car_ani.CarAniActivity
 import com.hloong.interview.ui.custom.mapview.MapChinaActivity
 import com.hloong.interview.ui.custom.player.PlayerActivity
 import com.hloong.interview.ui.custom.recyclerview.CustomRvActivity

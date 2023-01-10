@@ -15,6 +15,11 @@ import com.hloong.interview.R;
 public class BgAniReLayout extends RelativeLayout {
     private LayerDrawable layerDrawable;
     private ObjectAnimator objectAnimator;
+
+    private int musicPicRes = -1;
+    private final int DURATION_ANIMATION = 500;
+    private final int INDEX_BACKGROUND = 0;
+    private final int INDEX_FOREGROUND = 1;
     public BgAniReLayout(Context context) {
         this(context,null);
     }
@@ -25,26 +30,29 @@ public class BgAniReLayout extends RelativeLayout {
 
     public BgAniReLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        initLayerDrawable();
+        initObjectAnimator();
     }
-
-    private void init() {
-        Drawable bgDrawable = getContext().getDrawable(R.drawable.ic_blackground);
+    private void initLayerDrawable() {
+        Drawable backgroundDrawable = getContext().getDrawable(R.drawable.ic_blackground);
         Drawable[] drawables = new Drawable[2];
-        //初始化设置前景和背景一致
-        drawables[0] = bgDrawable;
-        drawables[1] = bgDrawable;
-        layerDrawable = new LayerDrawable(drawables);
 
-        objectAnimator = ObjectAnimator.ofFloat(this,"alpha",0f,1.0f);
-        objectAnimator.setDuration(500);
+        /*初始化时先将前景与背景颜色设为一致*/
+        drawables[INDEX_BACKGROUND] = backgroundDrawable;
+        drawables[INDEX_FOREGROUND] = backgroundDrawable;
+
+        layerDrawable = new LayerDrawable(drawables);
+    }
+    private void initObjectAnimator() {
+        objectAnimator = ObjectAnimator.ofFloat(this,"number",0f,1.0f);
+        objectAnimator.setDuration(DURATION_ANIMATION);
         objectAnimator.setInterpolator(new AccelerateInterpolator());
         objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 //0-1  (VSYNC - start )% duration
-                int foregroundAlpha = (int)((float)animation.getAnimatedValue() * 255);
-                layerDrawable.getDrawable(1).setAlpha(foregroundAlpha);
+                int foregroundAlpha = (int)((float)animation.getAnimatedValue()*255);
+                layerDrawable.getDrawable(INDEX_FOREGROUND).setAlpha(foregroundAlpha);
                 setBackground(layerDrawable);
             }
         });
@@ -56,7 +64,7 @@ public class BgAniReLayout extends RelativeLayout {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                layerDrawable.setDrawable(0,layerDrawable.getDrawable(1));
+                layerDrawable.setDrawable(INDEX_BACKGROUND,layerDrawable.getDrawable(INDEX_FOREGROUND));
             }
 
             @Override
@@ -73,6 +81,17 @@ public class BgAniReLayout extends RelativeLayout {
     }
 
     public void setForeground(Drawable drawable){
-        layerDrawable.setDrawable(1,drawable);
+        layerDrawable.setDrawable(INDEX_FOREGROUND,drawable);
+    }
+
+    public void beginAnimation(){
+        objectAnimator.start();
+    }
+    public boolean isNeed2UpdateBackground(int musicPicRes){
+        if (this.musicPicRes == -1) return true;
+        if (musicPicRes != this.musicPicRes){
+            return true;
+        }
+        return false;
     }
 }
