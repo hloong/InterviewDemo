@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.hloong.interview.ui.custom.ripple.RippleAnimationView
+        android:id="@+id/layout_RippleAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:strokWidth="18"
+        app:ripple_anim_type="fillRipple"
+        app:radius="150">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/music" />
+
+    </com.hloong.interview.ui.custom.ripple.RippleAnimationView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="点击识别音乐"
+        android:layout_marginTop="48dp"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="48dp"
+        android:gravity="center"
+        android:text="听歌识曲，识别你周围播放的歌"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
+</LinearLayout>

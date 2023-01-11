@@ -7,6 +7,7 @@ import com.hloong.interview.ui.custom.car_ani.CarAniActivity
 import com.hloong.interview.ui.custom.mapview.MapChinaActivity
 import com.hloong.interview.ui.custom.player.PlayerActivity
 import com.hloong.interview.ui.custom.recyclerview.CustomRvActivity
+import com.hloong.interview.ui.custom.ripple.RippleActivity
 import com.hloong.interview.ui.custom.vlayout.VLayoutActivity
 import com.hloong.interview.ui.recyclerview.RecyclerViewActivity
 import com.hloong.interview.ui.splash_ani.SplashActivity
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         }
         btPlayer.setOnClickListener {
             startActivity(Intent(this,PlayerActivity::class.java))
+        }
+        btRipple.setOnClickListener {
+            startActivity(Intent(this,RippleActivity::class.java))
         }
     }
 

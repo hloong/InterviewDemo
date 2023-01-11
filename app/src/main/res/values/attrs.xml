@@ -13,4 +13,15 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="RippleAnimationView">
+        <attr name="ripple_anim_color" format="color" />
+        <attr name="ripple_anim_type" format="enum">
+            <enum name="fillRipple" value="0" />
+            <enum name="strokeRipple" value="1" />
+        </attr>
+        <attr name="radius" format="integer"/>
+        <attr name="strokWidth" format="integer"/>
+    </declare-styleable>
+
 </resources>
