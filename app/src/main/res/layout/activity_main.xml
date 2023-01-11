@@ -62,4 +62,10 @@
         android:layout_height="wrap_content"
         android:text="网易云音乐水波纹动画搜歌"
         tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/btLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Path动画Loading"
+        tools:ignore="MissingConstraints" />
 </LinearLayout>
